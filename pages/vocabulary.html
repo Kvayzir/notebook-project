@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notebook Drafts</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="./../styles.css" />
+    <script type="module" src="./../js/script.js" defer></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Left Column -->
+            <div class="col-1 d-flex align-items-start">
+                <button id="menuButton" class="btn btn-primary mt-3">Menu</button>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-11">
+                <h1 class="text-center mt-3">Vocabulary valve</h1>
+                <div class="notes-container" id="notesContainer"></div>                
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <div class="menu-sidebar" id="menuSidebar">
+        <ul class="list-group list-group-flush">
+            <a href="./../index.html"><li class="list-group-item">Notebook</li></a>
+            <a href="./grammar.html"><li class="list-group-item">Grammar Notes</li></a>
+            <a href="./vocabulary.html"><li class="list-group-item">Vocabulary Notes</li></a>
+        </ul>
+    </div>
+    <div class="menu-overlay" id="menuOverlay"></div>
+</body>
+</html>
