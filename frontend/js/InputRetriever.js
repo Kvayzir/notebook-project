@@ -51,6 +51,7 @@ class Block {
     }
 
     getBlock = () => this.block;
+    insertText = (text) => this.text.val(text);
 }
 
 class Tool {
@@ -60,24 +61,31 @@ class Tool {
         this.color = color;
         this.button = $(`<button class="btn btn-primary" style="background-color: ${color}"><span>${name}</span></button>`);
         this.button.click(() => {   
-            const block = new Block(color, name).getBlock();
+            const block = new Block(color, name);
             const selection = window.getSelection();
             const range = selection.getRangeAt(0); // Get the current range (cursor position)
 
-            if (range) {
-                // Create a document fragment to insert the block
-                const fragment = document.createDocumentFragment();
-                fragment.appendChild(block[0]); // Convert jQuery object to DOM node
-                range.deleteContents(); // Remove any selected text
-                range.insertNode(fragment); // Insert the block at the cursor position
+            console.log(range);
+            if (!range || !this.confirmMatchingID(range.commonAncestorContainer, "text", 3)) return;
 
-                // Move the cursor after the inserted block
-                range.setStartAfter(block[0]);
-                range.setEndAfter(block[0]);
-                selection.removeAllRanges();
-                selection.addRange(range);
-            }
+            const fragment = document.createDocumentFragment();
+            block.insertText(range.toString());
+            fragment.appendChild(block.getBlock()[0]); // Convert jQuery object to DOM node
+            range.deleteContents(); // Remove any selected text
+            range.insertNode(fragment); // Insert the block at the cursor position
+
+            // Move the cursor after the inserted block
+            range.setStartAfter(block.getBlock()[0]);
+            range.setEndAfter(block.getBlock()[0]);
+            selection.removeAllRanges();
+            selection.addRange(range);
         });
+    }
+
+    confirmMatchingID = (element, id, depth) => {
+        if (depth == 0) return null; // Prevent infinite recursion
+        if (element.id === id) return true;
+        return this.confirmMatchingID(element.parentElement, id, depth - 1);
     }
 
     getButton = () => this.button;
